@@ -9,6 +9,7 @@ This is a Content Management System using node, inquirer, and SQL to build  a so
 #### *Created By Charles Price, (cfprice3)*
 #### email: cfprice3@gmail.com
 #### git url: https://github.com/cfprice3
+#### application url: https://cfprice3.github.io/Employee_Tracker/
 ![profileavatar](https://avatars2.githubusercontent.com/u/58721464?v=4)
 
 ### *Project Description:*
