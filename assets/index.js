@@ -1,5 +1,6 @@
 const connection = require("./connection");
 
+// constructor class to link to database to find all employees, departments, and roles
 class db {
     constructor(connection){
         this.connection=connection

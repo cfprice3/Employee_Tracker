@@ -1,6 +1,8 @@
+// consts declared to require npm packages
 const mysql = require('mysql');
 const util = require("util");
 
+// server connection
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -12,7 +14,6 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId + "\n");
-    // askQuestions();
 });
 
 connection.query=util.promisify(connection.query);

@@ -1,24 +1,11 @@
-
+// consts defined for model exports and npm
 const db =require("./assets/index")
+
 const connection = require("./assets/connection")
 
-// const mysql = require('mysql');
 const inquirer = require("inquirer");
 
-// var connection = mysql.createConnection({
-//     host: "localhost",
-//     port: 3306,
-//     user: "root",
-//     password: "sawyerROCK87",
-//     database: "employees_db"
-// });
-
-// connection.connect(function (err) {
-//     if (err) throw err;
-//     console.log("connected as id " + connection.threadId + "\n");
-//     askQuestions();
-// });
-
+// Prompts user to choose a field
 function askQuestions() {
     inquirer.prompt({
         message: "what would you like to do?",
@@ -36,6 +23,8 @@ function askQuestions() {
             "QUIT"
         ],
         name: "choice"
+
+        // based on users choice, .then will run a specified function to send them to desired action
     }).then(answers => {
         console.log(answers.choice);
         switch (answers.choice) {
@@ -82,6 +71,7 @@ function askQuestions() {
     })
 }
 
+// Will display all employees in table form
 function viewEmployees() {
     connection.query("SELECT * FROM employee", function (err, data) {
         console.table(data);
@@ -89,6 +79,7 @@ function viewEmployees() {
     })
 }
 
+// Will display all departments in table form
 function viewDepartments() {
     connection.query("SELECT * FROM department", function (err, data) {
         console.table(data);
@@ -96,6 +87,7 @@ function viewDepartments() {
     })
 }
 
+// Prompts user to type first name, last name and role ID and mgr ID, and adds new employee to table
 function addEmployee() {
     inquirer.prompt([{
             type: "input",
@@ -126,6 +118,7 @@ function addEmployee() {
     })
 }
 
+// Prompts user what department they want to add, then adds it to department table.
 function addDepartment() {
     inquirer.prompt([{
         type: "input",
@@ -140,6 +133,7 @@ function addDepartment() {
     })
 }
 
+// Asks user title, salary, and department ID, then adds new role to role table
 function addRole() {
     inquirer.prompt([
         {
@@ -164,28 +158,7 @@ function addRole() {
 
 }
 
-
-    // inquirer.prompt([
-    //     {
-    //         message: "What is the first name of the employee you want to update?",
-    //         type: "input",
-    //         name: "first"
-    //     }, 
-    //     {
-    //         message: "What is the last name of the employee you want to update?",
-    //         type: "input",
-    //         name: "last"
-    //     },
-    //        {
-    //         message: "enter the new role ID:",
-    //         type: "number",
-    //         name: "role_id"
-    //     }
-    // ]).then(function (response) {
-    //     connection.query("UPDATE employee SET role_id = ? WHERE (first_name, last_name) = (?,?)", [response.role_id, response.first, response.last], function (err, data) {
-    //         console.table(data);
-    //     })
-
+// Lists all employees and allows User to scroll and select which employee to update, then user answers prompts.
 async function updateEmployeeRole() {
     const employees = await db.findAllEmployees()
     const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
@@ -214,6 +187,7 @@ async function updateEmployeeRole() {
 })
 };
 
+// Lists all employees and allows User to scroll and select which employee to remove, then is removed from table.
 async function removeEmployee() {
     const employees = await db.findAllEmployees()
     const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
@@ -236,6 +210,8 @@ async function removeEmployee() {
         askQuestions();
 })
 };
+
+// Lists all departments and allows User to scroll and select which to remove, then is removed from table.
 
 async function removeDepartment() {
     const departments = await db.findAllDepartments()
@@ -260,7 +236,7 @@ async function removeDepartment() {
 })
 };
 
-
+// Lists all roles and allows User to scroll and select which to remove, then is removed from table.
 async function removeRole() {
     const roles = await db.findAllRoles()
     const roleChoices = roles.map(({ id, title, salary, department_id }) => ({
@@ -283,4 +259,6 @@ async function removeRole() {
         askQuestions();
 })
 };
+
+// Prompts user to select a field or function from a list.
 askQuestions();
