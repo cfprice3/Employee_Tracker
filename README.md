@@ -16,7 +16,7 @@ This is a Content Management System using node, inquirer, and SQL to build  a so
 This is a Content Management System using node, inquirer, and SQL to build  a solution for managing a company's employees information.
 
 
-![Gif Example](.\assets\gif\empTracker.gif)
+![Gif Example](Employee_Tracker\empTracker.gif)
 
 
  ## **Table of Contents**
